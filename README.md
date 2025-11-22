@@ -1,1 +1,1 @@
-# Walk Chat Plaza
+# Walk Plaza
