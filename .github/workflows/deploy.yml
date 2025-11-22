@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Deploy
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
