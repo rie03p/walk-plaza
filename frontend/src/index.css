@@ -30,6 +30,12 @@ body {
   min-height: 100vh;
 }
 
+/* Ensure full-bleed layout so centering works reliably */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

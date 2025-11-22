@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.23.0",
   "scripts": {
     "dev:backend": "pnpm --filter plaza-backend dev",
+    "dev:frontend": "pnpm --filter frontend dev",
     "deploy:backend": "pnpm --filter plaza-backend deploy"
   },
   "keywords": [],

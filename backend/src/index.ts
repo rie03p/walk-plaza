@@ -33,14 +33,19 @@ export class RootRoom {
     server.accept();
 
     const userId = crypto.randomUUID();
-    this.users.set(userId, server);
-
-    this.broadcast({ type: "join", userId });
-
+    
+    // Send init message to the new user with existing users (before adding to map)
     server.send(JSON.stringify({
       type: "init",
+      userId,
       users: [...this.users.keys()],
     }));
+
+    // Add user to the map
+    this.users.set(userId, server);
+
+    // Broadcast join message to all other users
+    this.broadcast({ type: "join", userId });
 
     server.addEventListener("message", (event: MessageEvent) => {
       const msg = JSON.parse(event.data as string);

@@ -9,6 +9,10 @@ importers:
   .: {}
 
   backend:
+    dependencies:
+      '@plaza/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.2025.0
@@ -22,6 +26,9 @@ importers:
 
   frontend:
     dependencies:
+      '@plaza/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -68,6 +75,12 @@ importers:
       vite:
         specifier: ^7.2.4
         version: 7.2.4(@types/node@24.10.1)
+
+  packages/shared:
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 

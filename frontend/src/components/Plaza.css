@@ -1,0 +1,13 @@
+.plaza-wrapper {
+  text-align: center;
+}
+
+.plaza-canvas {
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.plaza-controls {
+  margin-top: 10px;
+  color: #666;
+}
