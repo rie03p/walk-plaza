@@ -2,17 +2,50 @@ export interface Env {
   ROOM: DurableObjectNamespace;
 }
 
+const ALLOWED_ORIGINS = [
+  "https://walk-chat-plaza.pages.dev",
+  // "http://localhost:5173", // 開発環境用
+];
+
+function isOriginAllowed(origin: string | null): boolean {
+  if (!origin) return false;
+  return ALLOWED_ORIGINS.some(allowed => origin === allowed || origin.startsWith(allowed));
+}
+
 export default {
   async fetch(request: Request, env: Env) {
+    const origin = request.headers.get("Origin");
+    
+    // OriginチェックWebSocketアップグレード以外のリクエスト
+    if (!isOriginAllowed(origin) && request.headers.get("Upgrade") !== "websocket") {
+      return new Response("Forbidden", { status: 403 });
+    }
+
     const url = new URL(request.url);
 
     if (url.pathname === "/ws") {
+      // WebSocketリクエストのOriginチェック
+      if (!isOriginAllowed(origin)) {
+        return new Response("Forbidden", { status: 403 });
+      }
+      
       const id = env.ROOM.idFromName("root");
       const stub = env.ROOM.get(id);
       return stub.fetch(request);
     }
 
-    return new Response("Plaza backend OK");
+    const headers = new Headers({
+      "Access-Control-Allow-Origin": origin || "",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    });
+
+    // OPTIONSリクエスト(プリフライト)の処理
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers });
+    }
+
+    return new Response("Plaza backend OK", { headers });
   }
 };
 
