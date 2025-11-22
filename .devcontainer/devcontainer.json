@@ -1,0 +1,30 @@
+{
+  "name": "WarkChatPlaza",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "npm install -g pnpm@10",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    }
+  },
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "budparr.language-hugo-vscode",
+        "yzhang.markdown-all-in-one",
+        "eamodio.gitlens",
+        "davidanson.vscode-markdownlint",
+        "ms-azuretools.vscode-docker",
+        "Gruntfuggly.todo-tree",
+        "GitHub.copilot"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "sh",
+        "files.autoSave": "afterDelay"
+      }
+    }
+  }
+}
